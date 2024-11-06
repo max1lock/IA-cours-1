@@ -18,6 +18,7 @@ class ImageProcessor:
                 self.process_image(image_path, size)
 
     def process_image(self, image_path: str, size: int):
+        """Traitement de l'image et sauvegarde dans le dossier de sortie"""
         with Image.open(image_path) as img:
             img = self.resize_image(img, size)
             img = self.add_padding(img, size)
@@ -27,6 +28,7 @@ class ImageProcessor:
             img.save(output_path)
 
     def resize_image(self, img: Image.Image, size: int) -> Image.Image:
+        """Redimensionne l'image en conservant le ratio"""
         aspect_ratio = img.width / img.height
         if aspect_ratio > 1:
             new_width = size
@@ -37,6 +39,7 @@ class ImageProcessor:
         return img.resize((new_width, new_height))
 
     def add_padding(self, img: Image.Image, size: int) -> Image.Image:
+        """Ajoute du padding pour obtenir une image carrée"""
         padding_color = (114, 114, 144)
         width, height = img.size
 
@@ -47,10 +50,10 @@ class ImageProcessor:
             img = img.convert("RGB")
 
         if width < height:
-            # Ajouter à droite
+            """Ajouter le padding à droite"""
             padding = (0, 0, size - width, 0)
         else:
-            # Ajouter en bas
+            """Ajouter le padding en bas"""
             padding = (0, 0, 0, size - height)
 
         return ImageOps.expand(img, border=padding, fill=padding_color)
