@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class Image(ABC):
     def __init__(self, data):
         self._data = data
@@ -40,6 +41,7 @@ class GrayscaleImage(Image):
 
     def set_pixel(self, x, y, color):
         self._data[y][x] = color
+
 
 image = GrayscaleImage([[1, 2, 3], [4, 5, 6]])
 print(image.width)

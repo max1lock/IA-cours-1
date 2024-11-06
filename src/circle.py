@@ -5,7 +5,8 @@ class Circle:
         self._radius = radius
 
     def area(self):
-        return Circle.pi * self._radius ** 2
+        return Circle.pi * self._radius**2
+
 
 circle = Circle(5)
 print(circle.area())
